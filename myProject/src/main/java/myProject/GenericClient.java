@@ -2,7 +2,7 @@
 package myProject;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.rest.client.IGenericClient;
 
 public class GenericClient {
@@ -16,7 +16,7 @@ public class GenericClient {
 		IGenericClient client = ctx.newRestfulGenericClient(serverBase);
 		 
 		// Perform a search
-		Bundle results = client
+		ca.uhn.fhir.model.dstu2.resource.Bundle results = client
 		      .search()
 		      .forResource(Patient.class)
 		      .where(Patient.FAMILY.matches().value("duck"))
