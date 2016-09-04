@@ -7,7 +7,6 @@ import ca.uhn.fhir.rest.client.IGenericClient;
 
 public class GenericClient {
 
-
 	public static void main(String[] args) {
 
 		FhirContext ctx = FhirContext.forDstu2();
