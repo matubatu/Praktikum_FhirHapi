@@ -1,4 +1,4 @@
-package myProject;
+package Test;
 
 import java.lang.Thread.State;
 import java.sql.Connection;
@@ -17,17 +17,17 @@ public class PostgreConnectivityTest {
 				System.out.println("Connected");
 			Statement st = con.createStatement();
 			
-			String sql = "UPDATE patient_orig SET familyname ='xxx' where familyname IS NULL";
+//			String sql = "UPDATE patient_orig SET familyname ='xxx' where familyname IS NULL";
 			
 			
-//			String sql = "INSERT INTO patient (id, givenname, gender, address) VALUES "
-//					+ "('p_1', 'John', 'Male', 'Pressgasse 15')";
+			String sql = "INSERT INTO patient (id, familyname, givenname, gender, address) VALUES "
+					+ "('p_2', 'Schmieder','John', 'Male', 'Pressgasse 15')";
 			
 			
 //			String sql = "INSERT INTO patient (id, familyname, givenname, gender, address) VALUES "
 //					+ "('Patien/12', 'Schmidt', 'John', 'Male', 'Pressgasse 15')";
 			
-//			String sql = "DELETE FROM patient ";
+//			String sql = "DELETE FROM patient";
 //			String sql = "UPDATE patient SET nameFamily='Schneider' WHERE nameFamily ='' ";
 //			String sql = "update patient set nameFamily='Schneider' nameGiven='John'";
 //			

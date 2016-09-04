@@ -1,5 +1,5 @@
 
-package myProject;
+package Test;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
