@@ -9,6 +9,7 @@ import ca.uhn.fhir.model.dstu2.composite.ContainedDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Encounter;
+import ca.uhn.fhir.model.dstu2.resource.Encounter.Location;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
@@ -35,9 +36,12 @@ public class PatientErzeugen {
 		
 	// Contained Resources fuer Patient: Encounter
 		Encounter encounter = new Encounter();
+		
+		encounter.addLocation(new Location());
 		encounter.setContained(new ContainedDt());
 		
-		
+		String encPrint = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(encounter);
+		System.out.println(encPrint);		
 		
 		
 		
@@ -63,8 +67,8 @@ public class PatientErzeugen {
 		
 		patient.getManagingOrganization().setReference("Organization/123456");
 
-		String encoded = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
-		System.out.println(encoded);
+		String patientPrint = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
+		System.out.println(patientPrint);
 
 		
 	}
