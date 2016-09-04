@@ -23,7 +23,6 @@ public class GenericClient {
 		      .execute();
 		 
 		System.out.println("Found " + results.getEntry().size() + " patients named 'duck'");
-
 	}
 
 }
