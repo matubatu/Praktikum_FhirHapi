@@ -24,13 +24,19 @@ public class DataGenerator {
 		"Bregenz", "St. Poelten", "Steyr", "Krems an der Donau", "Eisenstadt",
 		"Villach", "Schwaz", "Feldkirch", "Judenburg", "Traun", "Bad Ischl" };
 
+	private static String[] Street = { "Amtsstrasse ", "Anichweg", "Arnimgasse ", "Silbergasse", "Audorfgasse",
+		"Arnoldgasse", "Bahndammweg", "Baldassgasse", "Berglergasse", "Berlagasse", "Dahliengasse",
+		"Cooperweg", "Dahliengasse", "Coulombgasse", "Deingasse", "Demmergasse ", " Dattlergasse",
+		"Corygasse", "Carminweg", "Castlegasse", "Carrogasse", "Bonitzgasse ", "Bussardgasse" };
+
+
+
    private static Random rand = new Random();
 
 // Nachnamen Generator
 	public static String generateNachName() {
 		return Nachnamen[rand.nextInt(Nachnamen.length)];
 	}
-
 // Vornamen Generator
 	public static String generateVorName() {
 
@@ -38,14 +44,21 @@ public class DataGenerator {
 			Middle[rand.nextInt(Middle.length)]+
 			End[rand.nextInt(End.length)];
 	}
-	
 // PLZ Generator
 	public static String generatePlz() {
 		return "" + rand.nextInt(10000);
    }
-  // Stadt Generator
+// Stadt Generator
 	public static String generateStadt() {
 		return City[rand.nextInt(City.length)];
+   }
+// Street Generator
+	public static String generateStreet() {
+		return Street[rand.nextInt(Street.length)];
+   }
+// HouseNumber Generator
+	public static String generateHouseNumber() {
+		return " " + rand.nextInt(10) + 1;
    }
 
 }
