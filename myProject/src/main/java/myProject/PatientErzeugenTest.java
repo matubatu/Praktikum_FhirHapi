@@ -1,5 +1,4 @@
 
-
 package myProject;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -22,7 +21,7 @@ import dataGenerators.DataGenerator;
 
 // Encoding a Resource to a String
 
-public class PatientErzeugen {
+public class PatientErzeugenTest {
 
 	public static void main(String[] args) {
 		
