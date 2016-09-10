@@ -40,7 +40,7 @@ public class PostgreConnectivityTest3 {
 			
 			// Original
 //			String funk = " SELECT fhir_create_resource('{"resource": {"resourceType": "Patient", "name": [{"given": ["Smith"]}]}}'::jsonb) ";
-			// mit '' satt ""
+			// mit '' satt "" 
 			String funk = " SELECT fhir_create_resource('{'resource': {'resourceType': 'Patient', 'name': [{'given': ['Smith']}]}}'::jsonb) ";
 			
 			callSt = con.prepareCall("{ CALL fhir_create_resource(?) }");
