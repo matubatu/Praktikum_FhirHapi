@@ -45,6 +45,11 @@ public class PostgreConnectivityTest3 {
 			
 			callSt = con.prepareCall("{ CALL fhir_create_resource(?) }");
 			callSt.setString(1, funk);
+			
+//			callSt = con.prepareCall("{ CALL ?:=fhir_create_resource(?) }");
+//			callSt.registerOutParameter(1, Types.VARCHAR);
+//			callSt.setString(2, funk);
+			
 			callSt.execute();
 			
 			System.out.println("Finishd calling StoredP");
