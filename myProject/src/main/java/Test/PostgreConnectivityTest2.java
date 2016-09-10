@@ -22,8 +22,9 @@ public class PostgreConnectivityTest2 {
 	public static void main(String[] args) {
 		
 		Connection con = null;
-//		http://stackoverflow.com/questions/17435060/call-a-stored-function-on-postgres-from-java
-
+		
+//	http://stackoverflow.com/questions/17435060/call-a-stored-function-on-postgres-from-java
+		
 		try {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection("jdbd:postgresql://localhost:2345/fhir","postgres", "");
@@ -32,9 +33,15 @@ public class PostgreConnectivityTest2 {
 				System.out.println("Connected");
 			Statement st = con.createStatement();
 			
-			st.execute("CREATE OR REPLACE FUNCTION fhir_read_resource(query json) RETURNS json AS '"
+// http://stackoverflow.com/questions/11862936/return-rows-from-a-pl-pgsql-function
+			
+			st.execute("CREATE OR REPLACE FUNCTION fhir_read_resource(query json) RETURNS json AS' "
 					+ "$BODY$"
-					+ "  var mod = require('/fhirbase/src/fhir/crud.coffee') "  //path "" wurde gewechselt
+// 					
+					+ "  var mod = require('/fhirbase/src/fhir/crud.coffee') " 					//ERROR -> path "" wurde gewechselt: '' (aber dann syntax Fehler bei "/")
+//					+ "  var mod = require( "C:/fhirbase-plv8-master/src/fhir/crud.coffee" ) "  //path wurde geändert
+//					+ "  var mod = require( "C:\fhirbase-plv8-master\src\fhir\crud.coffee" ) "  // Slash-backslash wurde geändert
+					
 					+ "  return mod.fhir_read_resource(plv8, query)"
 					+ "$BODY$"
 					+ "  LANGUAGE plv8 VOLATILE"
@@ -42,34 +49,21 @@ public class PostgreConnectivityTest2 {
 					+ "ALTER FUNCTION fhir_read_resource(json)"
 					+ "  OWNER TO postgres;' ");
 					
-			String funk = " SELECT fhir_create_resource(' { 'resource': {'resourceType': 'Patient', 'name': [{'given': ['Smith']}]} } '); ";
-			
-//			ResultSet rs = st.executeQuery(" SELECT fhir_create_resource('{ {"resource": {"resourceType": "Patient", "name": [{"given": ["Smith333"]}]}}::jsonb }') ");
-			ResultSet rs = st.executeQuery(funk);
+			ResultSet rs;
+//			rs = st.executeQuery(" SELECT fhir_create_resource('{ {"resource": {"resourceType": "Patient", "name": [{"given": ["Smith"]}]}} }')::jsonb; ");
+//			String funk = " SELECT fhir_create_resource('{"resource": {"resourceType": "Patient", "name": [{"given": ["Smith"]}]}}'::jsonb; ) ";
+			String funk = " SELECT fhir_create_resource(' { 'resource': {'resourceType': 'Patient', 'name': [{'given': ['Smith']}]} } ')::jsonb "; //ERROR -> "" wurde gewechselt: '' 
+			rs = st.executeQuery(funk);
 		
-//			stmt.execute("CREATE OR REPLACE FUNCTION refcursorfunc() RETURNS refcursor AS '"
-//			        + " DECLARE "
-//			        + "    mycurs refcursor; "
-//			        + " BEGIN "
-//			        + "    OPEN mycurs FOR SELECT 1 UNION SELECT 2; "
-//			        + "    RETURN mycurs; "
-//			        + " END;' language plpgsql");
-
-//			while (rs.next()) {
-//			    // do something with the results...
-//			}
+			while (rs.next()) {
+			    // do something with the results...
+			}
         	rs.close();
-			
-			
+        	con.close();
+			st.close();
 			
 		} catch (SQLException ee) {
 			ee.printStackTrace();
-			try {
-//				st.close();
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
