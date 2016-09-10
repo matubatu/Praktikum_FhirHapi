@@ -34,7 +34,9 @@ public class PostgreConnectivityTest2 {
 			Statement st = con.createStatement();
 			
 // http://stackoverflow.com/questions/11862936/return-rows-from-a-pl-pgsql-function
-			
+// Der link scheint logisch zu sein, aber nach 1 Tag Versuch bin ich auch nicht sicher, ob ich die Funtion da speichern sollte. 
+// Geht es weiter in PostgreConnectiviyTest3
+
 			st.execute("CREATE OR REPLACE FUNCTION fhir_create_resource(query json) RETURNS json AS' "
 					+ "$BODY$"
 // 					
