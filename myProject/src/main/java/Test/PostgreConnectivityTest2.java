@@ -35,24 +35,24 @@ public class PostgreConnectivityTest2 {
 			
 // http://stackoverflow.com/questions/11862936/return-rows-from-a-pl-pgsql-function
 			
-			st.execute("CREATE OR REPLACE FUNCTION fhir_read_resource(query json) RETURNS json AS' "
+			st.execute("CREATE OR REPLACE FUNCTION fhir_create_resource(query json) RETURNS json AS' "
 					+ "$BODY$"
 // 					
-					+ "  var mod = require('/fhirbase/src/fhir/crud.coffee') " 					//ERROR -> path "" wurde gewechselt: '' (aber dann syntax Fehler bei "/")
-//					+ "  var mod = require( "C:/fhirbase-plv8-master/src/fhir/crud.coffee" ) "  //path wurde geändert
-//					+ "  var mod = require( "C:\fhirbase-plv8-master\src\fhir\crud.coffee" ) "  // Slash-backslash wurde geändert
+//					+ "  var mod = require('/fhirbase/src/fhir/crud.coffee') " 					//ERROR -> path "" wurde gewechselt: '' (aber dann syntax Fehler bei "/")
+//					+ "  var mod = require( 'C:/fhirbase-plv8-master/src/fhir/crud.coffee' ) "  //path wurde geändert
+					+ "  var mod = require( "c:\fhirbase-plv8-master\src\fhir\crud.coffee" ) "  // Slash-backslash wurde geändert
 					
-					+ "  return mod.fhir_read_resource(plv8, query)"
+					+ "  return mod.fhir_create_resource(plv8, query)"
 					+ "$BODY$"
 					+ "  LANGUAGE plv8 VOLATILE"
 					+ "  COST 100;"
-					+ "ALTER FUNCTION fhir_read_resource(json)"
+					+ "ALTER FUNCTION fhir_create_resource(json)"
 					+ "  OWNER TO postgres;' ");
 					
 			ResultSet rs;
 //			rs = st.executeQuery(" SELECT fhir_create_resource('{ {"resource": {"resourceType": "Patient", "name": [{"given": ["Smith"]}]}} }')::jsonb; ");
 //			String funk = " SELECT fhir_create_resource('{"resource": {"resourceType": "Patient", "name": [{"given": ["Smith"]}]}}'::jsonb; ) ";
-			String funk = " SELECT fhir_create_resource(' { 'resource': {'resourceType': 'Patient', 'name': [{'given': ['Smith']}]} } ')::jsonb "; //ERROR -> "" wurde gewechselt: '' 
+			String funk = " SELECT fhir_create_resource(' { 'resource': {'resourceType': 'Patient', 'name': [{'given': ['Smith']}]} } '::jsonb) "; //ERROR -> "" wurde gewechselt: '' 
 			rs = st.executeQuery(funk);
 		
 			while (rs.next()) {
