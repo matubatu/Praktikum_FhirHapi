@@ -54,7 +54,7 @@ public class PatientErzeugenTest {
 		
 // Generierung von Adresse
 		AddressDt address = patient.addAddress();
-		address.setUse(AddressUseEnum.HOME);
+//		address.setUse(AddressUseEnum.HOME);
 //		address.addLine("Erewhon St 23");
 		address.setCity(DataGenerator.generateStadt());
 		address.setPostalCode( DataGenerator.generatePlz() );

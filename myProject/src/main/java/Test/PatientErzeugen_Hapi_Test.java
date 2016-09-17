@@ -17,8 +17,6 @@ public class PatientErzeugen_Hapi_Test {
 		
 		for (int i = 1; i < 2; i++) {
 			
-//			patient.setId("Patient/" + i); String pId = "Patient/" + i;
-			
 			HumanNameDt name = patient.addName();
 			name.addFamily(DataGenerator.generateNachName());
 			name.addGiven(DataGenerator.generateVorName());
