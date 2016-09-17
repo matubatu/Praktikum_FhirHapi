@@ -1,4 +1,4 @@
-package myProject;
+package ErsteSchritte;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
@@ -18,7 +18,7 @@ public class Resource2String {
 		
 		Patient patient = new Patient();
 		
-		// Add an MRN:  patient identifier
+// Add an MRN:  patient identifier
 		IdentifierDt id = patient.addIdentifier();
 		id.setSystem("http://example.com/...");
 		id.setValue("MRN001");
@@ -29,7 +29,7 @@ public class Resource2String {
 		name.addGiven("Graham");
 		name.addGiven("Steven");
 
-		// with parser encode this resource into a string.
+// with parser encode this resource into a string.
 		String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		System.out.println(encoded);
 		

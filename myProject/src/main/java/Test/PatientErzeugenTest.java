@@ -29,45 +29,43 @@ public class PatientErzeugenTest {
 		
 		Patient patient = new Patient();
 		
-	//id Generate:
-		patient.setId("Patient/1333");
-		patient.addIdentifier().setSystem("urn:mrns").setValue("253345");
+//id Generate:
+//		patient.setId("Patient/1333");
+//		patient.addIdentifier().setSystem("urn:mrns").setValue("253345");
 		
 	// Contained Resources fuer Patient: Encounter
-		Encounter encounter = new Encounter();
-		
-		encounter.addLocation(new Location());
-		encounter.setContained(new ContainedDt());
-		
-		String encPrint = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(encounter);
-		System.out.println(encPrint);		
-		
-		
+//		Encounter encounter = new Encounter();
+//		
+//		encounter.addLocation(new Location());
+//		encounter.setContained(new ContainedDt());
+//		
+//		String encPrint = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(encounter);
+//		System.out.println(encPrint);		
 		
 		HumanNameDt name = patient.addName();
 		
-	// Generierung von Namen
-		name.setUse(NameUseEnum.OFFICIAL);
+// Generierung von Namen
+//		name.setUse(NameUseEnum.OFFICIAL);
 		name.addFamily(DataGenerator.generateNachName());
-		name.addGiven(DataGenerator.generateVorName());
 		name.addGiven(DataGenerator.generateVorName());
 
 		patient.setGender(AdministrativeGenderEnum.MALE);
 		patient.setBirthDate(new DateDt("1987-11-11"));
 		
-	// Generierung von Adresse
-
+// Generierung von Adresse
 		AddressDt address = patient.addAddress();
 		address.setUse(AddressUseEnum.HOME);
-		address.addLine("Erewhon St 23");
+//		address.addLine("Erewhon St 23");
 		address.setCity(DataGenerator.generateStadt());
 		address.setPostalCode( DataGenerator.generatePlz() );
 		
-		
-		patient.getManagingOrganization().setReference("Organization/123456");
+//		patient.getManagingOrganization().setReference("Organization/123456");
 
-		String patientPrint = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
+		String patientPrint = ctx.newJsonParser().encodeResourceToString(patient);
 		System.out.println(patientPrint);
+
+		String patientPrint2 = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
+		System.out.println(patientPrint2);
 
 		
 	}

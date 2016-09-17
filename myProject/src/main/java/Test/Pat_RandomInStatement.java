@@ -6,20 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
-import ca.uhn.fhir.model.dstu2.composite.ContainedDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.resource.Encounter;
-import ca.uhn.fhir.model.dstu2.resource.Encounter.Location;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dstu2.valueset.NameUseEnum;
-import ca.uhn.fhir.model.primitive.DateDt;
-import ca.uhn.fhir.model.primitive.IdDt;
-import ch.qos.logback.core.net.SyslogOutputStream;
 import dataGenerators.DataGenerator;
 
 public class Pat_RandomInStatement {
@@ -34,8 +24,8 @@ public class Pat_RandomInStatement {
 		
 //Patient ERZEUGEN
 		
+		patient.setId("Patient/smith");
 		HumanNameDt name = patient.addName();
-		
 		name.addFamily(DataGenerator.generateNachName());
 		name.addGiven(DataGenerator.generateVorName());
 		patient.setGender(AdministrativeGenderEnum.MALE);
@@ -44,18 +34,15 @@ public class Pat_RandomInStatement {
 		address.setCity(DataGenerator.generateStadt());
 		address.setPostalCode( DataGenerator.generatePlz() );
 		
-		String patientPrint = ctx.newJsonParser().encodeResourceToString(patient);
-//		String patientPrint = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
-		System.out.println(patientPrint + "\n");
+		String patientJson = ctx.newJsonParser().encodeResourceToString(patient);
+//		String patientJson = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
+		System.out.println("Pure Json: " + patientJson + "\n");
 		
-//		String SqlPrint = SqlPrint.replaceAll("('|\")", "\\\\$1");
-//		System.out.println(SqlPrint);
-		
-		String SqlStatem = " SELECT fhir_create_resource(\'{ \"allowId\": true, \"resource\": " + patientPrint + "\');";
-		System.out.println(SqlStatem + "\n");
+		String SqlStatem = " SELECT fhir_create_resource('{ \"allowId\": true, \"resource\": " + patientJson + "');";
+//		String SqlStatem = " SELECT fhir_create_resource(\'{ \"allowId\": true, \"resource\": " + patientJson + "\');";
+		System.out.println("Concatenate mit StProc:" + SqlStatem+ "\n");
 		
 		String SqlPrint = SqlStatem.replaceAll("('|\")", "\\\\$1");
-//		SqlPrint = SqlStatem.replace("\'", "\\\'");
 		System.out.println(SqlPrint + "\n");
         
 //        String patient = " SELECT fhir_create_resource(\'{ \"allowId\": true, \"resource\": { \"resourceType\": \"Patient\", \"id\": nachName, \"name\":[{\"given\":\"Bruno\"}]}}\'); ";
@@ -74,9 +61,8 @@ public class Pat_RandomInStatement {
 //            }
 //
 //            st.executeUpdate(" SET plv8.start_proc = 'plv8_init' ");
-//            
 //
-//            rs = st.executeQuery( SqlStatem );
+//            rs = st.executeQuery( SqlPrint );
 //            System.out.println("Finished Pat");
 //            
 //				

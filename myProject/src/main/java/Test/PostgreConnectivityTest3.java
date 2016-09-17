@@ -29,11 +29,18 @@ public class PostgreConnectivityTest3 {
             }
 
             st.executeUpdate(" SET plv8.start_proc = 'plv8_init'");
+            
+// Patient Erzeugen
+//          Json Patient: {"allowId":true,"resource":{"resourceType":"Patient","id":"smith","name":[{"given":"Bruno"}]}}
+            rs = st.executeQuery( "SELECT fhir_create_resource(\' {\"allowId\":true,\"resource\":{\"resourceType\":\"Patient\",\"id\":\"smith\",\"name\":[{\"given\":\"Bruno\"}]}}\') ");
 
-            rs = st.executeQuery( "SELECT fhir_create_resource(\'{"
-            		+ "\"resource\": {"
-            		+ "\"resourceType\": \"Patient\", "
-            		+ "\"name\": [{\"given\": [\"test0900\"]}]}}\')");
+//          Json Encounter:  {"allowId":true,"resource":{"resourceType":"Encounter","status":"onleave","patient":{"reference":"Patient/smith"}}}
+            rs = st.executeQuery( "SELECT fhir_create_resource(\' {\"allowId\":true,\"resource\":{\"resourceType\":\"Encounter\",\"status\":\"onleave\",\"patient\":{\"reference\":\"Patient/smith\"}}} \') ");
+            
+//            rs = st.executeQuery( "SELECT fhir_create_resource(\'{"
+//            		+ "\"resource\": {"
+//            		+ "\"resourceType\": \"Patient\", "
+//            		+ "\"name\": [{\"given\": [\"test0900\"]}]}}\') ");
 
             System.out.println("Finished calling StoredProcedure");
 			
