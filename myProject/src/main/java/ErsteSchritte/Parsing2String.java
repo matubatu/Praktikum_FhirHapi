@@ -1,5 +1,5 @@
 
-package myProject;
+package ErsteSchritte;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.resource.Patient;

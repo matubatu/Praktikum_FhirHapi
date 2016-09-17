@@ -43,6 +43,7 @@ public class Resource2String {
 		patient2.getManagingOrganization().setReference("Organization/123456");
 //		System.out.println(ref);
 		
+//		String encoded2 = ctx.newJsonParser().encodeResourceToString(patient2);
 		String encoded2 = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient2);
 		System.out.println(encoded2);
 		
