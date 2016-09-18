@@ -35,6 +35,7 @@ public class PatEncounter_Random_Object {
 		address.setCity(DataGenerator.generateStadt());
 		address.setPostalCode( DataGenerator.generatePlz() );
 		
+//--- Pure Json	
 		String patientJson = ctx.newJsonParser().encodeResourceToString(patient);
 		System.out.println("Pure Json: " + patientJson + "\n");
 		
