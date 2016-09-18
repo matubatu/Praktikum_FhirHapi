@@ -20,7 +20,7 @@ public class PatEncounter_Random_NoObject2 {
 		
 		try {
 			
-//--- Connection-Configuration:
+//--- Connection-Configuration of DB
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection("jdbd:postgresql://localhost:2345/fhir","postgres", "");
 			if (con!=null) System.out.println("Connected");
