@@ -20,6 +20,8 @@ public class DataGenerator {
    private static String[] End = { "d", "ed", "ark", "arc", "es", "er", "der",
       "tron", "med", "ure", "zur", "cred", "mur" };
 
+   private static String[] Gender = { "male", "female" };
+
 	private static String[] City = { "Linz", "Wien", "Graz", "Salzburg", "Wels",
 		"Bregenz", "St. Poelten", "Steyr", "Krems an der Donau", "Eisenstadt",
 		"Villach", "Schwaz", "Feldkirch", "Judenburg", "Traun", "Bad Ischl" };
@@ -48,6 +50,8 @@ public class DataGenerator {
 	public static String generatePlz() {
 		return "" + rand.nextInt(10000);
    }
+	
+
 // Stadt Generator
 	public static String generateStadt() {
 		return City[rand.nextInt(City.length)];

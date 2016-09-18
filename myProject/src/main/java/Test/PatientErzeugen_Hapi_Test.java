@@ -17,18 +17,21 @@ public class PatientErzeugen_Hapi_Test {
 		
 		for (int i = 1; i < 2; i++) {
 			
+			patient.setId("Patient/smith7");
 			HumanNameDt name = patient.addName();
 			name.addFamily(DataGenerator.generateNachName());
 			name.addGiven(DataGenerator.generateVorName());
 //			patient.setGender(AdministrativeGenderEnum.MALE);
 			
 			AddressDt address = patient.addAddress();
-			address.addLine(DataGenerator.generateStreet() + " " +  DataGenerator.generateHouseNumber());
+			address.addLine(DataGenerator.generateStreet() + "" +  DataGenerator.generateHouseNumber());
 			address.setCity(DataGenerator.generateStadt());
 			address.setPostalCode( DataGenerator.generatePlz() );
 			
 			String patientPrint2 = ctx.newJsonParser().encodeResourceToString(patient);
 			System.out.println("Without PrettyPrint: " + patientPrint2 + "\n");
+			
+			System.out.println("Nur name: " + name.getFormatCommentsPost() + "\n");
 
 			String patientPrint = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(patient);
 			System.out.println(patientPrint + "\n");

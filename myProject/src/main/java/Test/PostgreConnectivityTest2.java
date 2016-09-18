@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PostgreConnectivityTest3 {
+public class PostgreConnectivityTest2 {
 
 	public static void main(String[] args) {
 		
@@ -32,16 +32,14 @@ public class PostgreConnectivityTest3 {
             
 // Patient Erzeugen
 //          Json Patient: {"allowId":true,"resource":{"resourceType":"Patient","id":"smith","name":[{"given":"Bruno"}]}}
-            rs = st.executeQuery( "SELECT fhir_create_resource(\' {\"allowId\":true,\"resource\":{\"resourceType\":\"Patient\",\"id\":\"smith\",\"name\":[{\"given\":\"Bruno\"}]}}\') ");
-
-//          Json Encounter:  {"allowId":true,"resource":{"resourceType":"Encounter","status":"onleave","patient":{"reference":"Patient/smith"}}}
-            rs = st.executeQuery( "SELECT fhir_create_resource(\' {\"allowId\":true,\"resource\":{\"resourceType\":\"Encounter\",\"status\":\"onleave\",\"patient\":{\"reference\":\"Patient/smith\"}}} \') ");
             
-//            rs = st.executeQuery( "SELECT fhir_create_resource(\'{"
-//            		+ "\"resource\": {"
-//            		+ "\"resourceType\": \"Patient\", "
-//            		+ "\"name\": [{\"given\": [\"test0900\"]}]}}\') ");
+            String x = "SELECT fhir_create_resource(\'{ \"allowId\": true, \"resource\": {\"resourceType\":\"Patient\",\"id\":\"smithyx\",\"name\":[{\"family\":[\"Wagner\"],\"given\":[\"Azakirzur\"]}],\"address\":[{\"line\":[\"Bussardgasse 41\"],\"city\":\"Bad Ischl\",\"postalCode\":\"2268\"}]}\')";
+            rs = st.executeQuery(x);
 
+//             
+//          Json Encounter:  {"allowId":true,"resource":{"resourceType":"Encounter","status":"onleave","patient":{"reference":"Patient/smith"}}}
+//            rs = st.executeQuery( "SELECT fhir_create_resource(\' {\"allowId\":true,\"resource\":{\"resourceType\":\"Encounter\",\"status\":\"onleave\",\"patient\":{\"reference\":\"Patient/smith\"}}} \') ");
+            
             System.out.println("Finished calling StoredProcedure");
 			
         } catch (ClassNotFoundException e) {
