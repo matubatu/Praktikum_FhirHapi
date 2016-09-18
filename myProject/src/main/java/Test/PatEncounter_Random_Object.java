@@ -22,7 +22,7 @@ public class PatEncounter_Random_Object {
 		FhirContext ctx = FhirContext.forDstu2();
 		Patient patient = new Patient();
 		
-//Patient ERZEUGEN
+//--- Patient ERZEUGEN
 		patient.setId("Patient/smithke6");
 		HumanNameDt name = patient.addName();
 		
@@ -31,7 +31,6 @@ public class PatEncounter_Random_Object {
 		patient.setGender(AdministrativeGenderEnum.MALE);
 		
 		AddressDt address = patient.addAddress();
-//		
 		address.addLine(DataGenerator.generateStreet() + "" +  DataGenerator.generateHouseNumber());
 		address.setCity(DataGenerator.generateStadt());
 		address.setPostalCode( DataGenerator.generatePlz() );
@@ -39,11 +38,11 @@ public class PatEncounter_Random_Object {
 		String patientJson = ctx.newJsonParser().encodeResourceToString(patient);
 		System.out.println("Pure Json: " + patientJson + "\n");
 		
-//Concatenation		
+//--- Concatenation		
 		String SqlStatem = " SELECT fhir_create_resource(' {\"allowId\": true, \"resource\":" + patientJson + " } ')";	
 		System.out.println("Concatenate with JSON:" + SqlStatem+ "\n");
 		
-// Escape einfuegen	
+//--- Escape einfuegen	
 		String SqlPrint = SqlStatem.replaceAll("(\")", "\\\\$1");
 		System.out.println("Ziel: " + SqlPrint + "\n");
         
