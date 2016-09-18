@@ -41,7 +41,7 @@ public class PatEncounter_Random_Object {
 		
 //Concatenation		
 		String SqlStatem = " SELECT fhir_create_resource(' {\"allowId\": true, \"resource\":" + patientJson + " } ')";	
-		System.out.println("Concatenate mit JSON:" + SqlStatem+ "\n");
+		System.out.println("Concatenate with JSON:" + SqlStatem+ "\n");
 		
 // Escape einfuegen	
 		String SqlPrint = SqlStatem.replaceAll("(\")", "\\\\$1");
