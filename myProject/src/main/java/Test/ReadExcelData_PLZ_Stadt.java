@@ -16,8 +16,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-// http://stackoverflow.com/questions/16458640/how-to-group-the-values-which-are-in-excel-to-a-hashmap
-
 public class ReadExcelData_PLZ_Stadt {
 	
     public static void main(String[] args) {
@@ -66,22 +64,14 @@ public class ReadExcelData_PLZ_Stadt {
             System.out.println("File Closed \n");
             
 //Random value out
-            // http://stackoverflow.com/questions/929554/is-there-a-way-to-get-the-value-of-a-hashmap-randomly-in-java
+
             Random generator = new Random();
             Object[] values = map.values().toArray();
             String randomValue = (String) values[generator.nextInt(values.length)];
             
             String plzString = (String) getKeyFromValue(map, randomValue);
             System.out.println("plz: " + plzString + " " + randomValue);
-//            System.out.println("plz: " + getKeyFromValue(map, randomValue) + " " + randomValue);
              
-// PRINT OUT ALL          
-//            Iterator<Integer> keySetIterator = map.keySet().iterator();
-//
-//            while(keySetIterator.hasNext()){
-//              Integer key = keySetIterator.next();
-//              System.out.println("plz: " + key + " Stadt: " + map.get(key));
-//            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException ex) {
