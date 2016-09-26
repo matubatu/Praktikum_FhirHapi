@@ -34,17 +34,20 @@ public class DataBase_AT {
 			//--- Connection-Configuration of DB
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection("jdbd:postgresql://localhost:2345/fhir","postgres", "");
-			if (con!=null) System.out.println("Server: Connected");
+			if (con!=null) System.out.println("Server connected \n");
 			st = con.createStatement();
 			st.executeUpdate(" SET plv8.start_proc = 'plv8_init' ");
 	
-			
 			//--- Location Res Creation
-			for (int i = 1; i <2; i++) { 
+			System.out.println("processing Location data from Excel... \n ");
+
+			int i;
+			for (i = 1; i <282; i++) {  // 281 items in Excel
 				
 				String SqlLocation = " SELECT fhir_create_resource(' {"
 						+ " \"allowId\":true,"
 						+ " \"resource\":{\"resourceType\":\"Location\", "
+						+ "\"id\":\"" + i + "\", "
 						+ " \"status\":\"active\", "
 						+ " \"name\":\" " + addressGenerator.getElement(ExcelElement.HOSPITAL_NAME, i) + " \", "
 						+ " \"address\":[{\"line\":[\""+ addressGenerator.getElement(ExcelElement.LINE, i) + "\"], "
@@ -53,37 +56,37 @@ public class DataBase_AT {
 			
 				rs = st.executeQuery( SqlLocation);
 					
-				System.out.println("Location Resources uploaded! \n");
 			} // for
+			System.out.println(i-1 + " Location-Resources was uploaded! \n");
 
 			//--- Patient-Encounter Res Creation
-//			for (int i = 1; i <2; i++) { 
-//				
-//				String SqlPatient = " SELECT fhir_create_resource(' {"
-//						+ "\"allowId\":true,"
-//						+ "\"resource\":{\"resourceType\":\"Patient\","
-//						+ "\"id\":\"" + i + "\", "
-//						+ " \"name\":[{\"family\":\""+ DataGenerator_AT.generateNachName() + "\", \"given\":\""+ DataGenerator_AT.generateVorName() + "\"}], "
-//						+ " \"address\":[{\"line\":[\""+ DataGenerator_AT.generateStreet() + DataGenerator_AT.generateHouseNumber() + "\"], "
-//						+ " \"city\":\""+ generator.randomiseCity() + "\", \"postalCode\":\""+ generator.randomisePostcode() + "\"}] "
-//						+ "}} ')";	
-//				
-//				String SqlEncounter = " SELECT fhir_create_resource(' {"
-//						+ " \"allowId\":true,"
-//						+ " \"resource\":{\"resourceType\":\"Encounter\","
-//						+ "\"id\":\"" + i + "\", "
-//						+ " \"status\":\"onleave\", "
-//						
-//						+ " \"patient\":{\"reference\":\"Patient/" + i + "\"}, "
-//						+ " \"location\":[{\"location\":{\"reference\":\"Location/1 \"},\"status\":\"active\"}] "
-//								
-//						+ "}} ')";
-//					
-//				rs = st.executeQuery( SqlPatient );
-//				rs = st.executeQuery( SqlEncounter);
-//					
-//				System.out.println("processing... ");
-//			} // for
+			System.out.println("creating resources... \n ");
+			int j;
+			for (j = 1; j < 1001; j++) { 
+				
+				String SqlPatient = " SELECT fhir_create_resource(' {"
+						+ "\"allowId\":true,"
+						+ "\"resource\":{\"resourceType\":\"Patient\","
+						+ "\"id\":\"" + j + "\", "
+						+ " \"name\":[{\"family\":\""+ DataGenerator_AT.generateNachName() + "\", \"given\":\""+ DataGenerator_AT.generateVorName() + "\"}], "
+						+ " \"address\":[{\"line\":[\""+ DataGenerator_AT.generateStreet() + DataGenerator_AT.generateHouseNumber() + "\"], "
+						+ " \"city\":\""+ generator.randomiseCity() + "\", \"postalCode\":\""+ generator.randomisePostcode() + "\"}] "
+						+ "}} ')";	
+				
+				String SqlEncounter = " SELECT fhir_create_resource(' {"
+						+ " \"allowId\":true,"
+						+ " \"resource\":{\"resourceType\":\"Encounter\","
+						+ "\"id\":\"" + j + "\", "
+						+ " \"status\":\"onleave\", "
+						+ " \"patient\":{\"reference\":\"Patient/" + j + "\"}, "
+						+ " \"location\":[{\"location\":{\"reference\":\"Location/1 \"},\"status\":\"active\"}] "
+						+ "}} ')";
+					
+				rs = st.executeQuery( SqlPatient );
+				rs = st.executeQuery( SqlEncounter);
+					
+			} // for
+				System.out.println(j-1 + " Patient-Encoutner pair was created! \n ");
             
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

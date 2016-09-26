@@ -18,8 +18,6 @@ import org.apache.poi.ss.usermodel.Row;
 
 import dataGenerators.Record;
 
-// http://stackoverflow.com/questions/16458640/how-to-group-the-values-which-are-in-excel-to-a-hashmap
-
 public class ReadExcelData_KH_Address {
 	
     public static void main(String[] args) { 
@@ -60,31 +58,22 @@ public class ReadExcelData_KH_Address {
 						switch(stringColumnCount) {
 						case 1:
 							hospitalName = cell.getStringCellValue();
-//							System.out.print("" + "\n");
-//							System.out.print(cell.getStringCellValue() + "\t\t");
 							break;
 						case 2:
 							record.setLine(cell.getStringCellValue()); 
-//							System.out.print(cell.getStringCellValue() + "\t\t");
 						   	break;
 						case 3:
 							record.setCity(cell.getStringCellValue()); 
-//							System.out.print(cell.getStringCellValue() + "\t\t");
 							break;
 						case 4:
 							record.setState(cell.getStringCellValue()); 
-//							System.out.print(cell.getStringCellValue() + "\t\t");
 							break;
 						case 5:
-//							System.out.print(cell.getNumericCellValue() + "\t\t");
 							i= (int) cell.getNumericCellValue();
 							postCode = String.valueOf( i );
 							record.setPostCode(postCode);
 							break;
                         }
-//						Systjm.out.println(""); 
-//						System.out.println("test: "+ stringColumnCount); 
-                   
                 }
                 map.put(hospitalName, record);
             }

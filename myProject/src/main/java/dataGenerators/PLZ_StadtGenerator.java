@@ -16,8 +16,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-// http://stackoverflow.com/questions/16458640/how-to-group-the-values-which-are-in-excel-to-a-hashmap
-
 /**
  * Read from Excel document, save it in HashMap, randomize it, give a city-postcode back
  */
@@ -61,7 +59,6 @@ public class PLZ_StadtGenerator {
                 map.put(plz, stadt);
             }
             file.close();
-            System.out.println("PLZ-Stadt File Closed \n");
             
         } catch (FileNotFoundException e) {
             e.printStackTrace();

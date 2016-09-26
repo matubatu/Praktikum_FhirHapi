@@ -18,8 +18,6 @@ import org.apache.poi.ss.usermodel.Row;
 
 import dataGenerators.Record;
 
-// http://stackoverflow.com/questions/16458640/how-to-group-the-values-which-are-in-excel-to-a-hashmap
-
 public class KH_AddressGenerator {
 	
 	HashMap<Integer, Record> map = new HashMap<Integer, Record>();
@@ -33,7 +31,7 @@ public class KH_AddressGenerator {
 		
         try {
         	
-        	File f = new File("c:\\Users\\matubatu\\Desktop\\KH_Adresse_x.xls");
+        	File f = new File("c:\\Users\\matubatu\\Desktop\\KH_Adresse.xls");
             FileInputStream file = new FileInputStream(f);
 
             HSSFWorkbook workbook = new HSSFWorkbook(file);
@@ -65,20 +63,15 @@ public class KH_AddressGenerator {
 					switch(columnCount) {
 					case 1:
 						record.setHospitalName(cell.getStringCellValue());
-//						System.out.print("" + "\n");
-//						System.out.print(cell.getStringCellValue() + "\t\t");
 						break;
 					case 2:
 						record.setLine(cell.getStringCellValue()); 
-//						System.out.print(cell.getStringCellValue() + "\t\t");
 					   	break;
 					case 3:
 						record.setCity(cell.getStringCellValue()); 
-//						System.out.print(cell.getStringCellValue() + "\t\t");
 						break;
 					case 4:
 						record.setState(cell.getStringCellValue()); 
-//						System.out.print(cell.getStringCellValue() + "\t\t");
 						break;
 					case 5:
 						i= (int) cell.getNumericCellValue();
@@ -90,13 +83,6 @@ public class KH_AddressGenerator {
                 map.put(rowCount, record);
             }
             file.close();
-            
-//            for (Map.Entry<Integer, Record> entry : map.entrySet()) {
-//                Integer key = entry.getKey();
-//                Record value = entry.getValue();
-//                System.out.println("key: " + key + "\n " + value.toString());
-//            }
-            System.out.println("1: "+ map.get(4).getLine() +"\n");
             
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -115,11 +101,9 @@ public class KH_AddressGenerator {
 		switch(cell) {
 			case HOSPITAL_NAME:
 				element = map.get(i).getHospitalName();
-//				 System.out.println("e "+element+"\n");
 				break;
 			case LINE:
 				element = map.get(i).getLine();
-				// System.out.println("e "+element+"\n");
 			   	break;
 			case CITY:
 				element = map.get(i).getCity();
@@ -134,9 +118,6 @@ public class KH_AddressGenerator {
 		return element;
 		
 	}
-	
-	
-	
 	
 }
 
