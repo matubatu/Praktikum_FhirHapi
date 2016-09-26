@@ -18,7 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 
 // http://stackoverflow.com/questions/16458640/how-to-group-the-values-which-are-in-excel-to-a-hashmap
 
-public class ReadExcelData {
+public class ReadExcelData_PLZ_Stadt {
 	
     public static void main(String[] args) {
     	
