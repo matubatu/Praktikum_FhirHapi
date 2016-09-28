@@ -19,6 +19,7 @@ import dataGenerators.PLZ_StadtGenerator;
 public class DataBase_AT {
 
 	public static final String pfad = "c:\\Users\\matubatu\\Desktop\\Map.xls";
+	public static final int locationNum = 10;
 	
 	public static void main(String[] args) {
 		
@@ -26,7 +27,7 @@ public class DataBase_AT {
 		Statement st = null;
 		ResultSet rs = null;
 		
-		PLZ_StadtGenerator generator=new PLZ_StadtGenerator();
+		PLZ_StadtGenerator stadtGenerator=new PLZ_StadtGenerator();
 		KH_AddressGenerator addressGenerator = new KH_AddressGenerator();
 				
 		try {
@@ -42,7 +43,7 @@ public class DataBase_AT {
 			System.out.println("processing Location data from Excel... \n ");
 
 			int i;
-			for (i = 1; i <282; i++) {  // 281 items in Excel
+			for (i = 1; i <=locationNum; i++) {  // 281 items in Excel
 				
 				String SqlLocation = " SELECT fhir_create_resource(' {"
 						+ " \"allowId\":true,"
@@ -62,7 +63,7 @@ public class DataBase_AT {
 			//--- Patient-Encounter Res Creation
 			System.out.println("creating resources... \n ");
 			int j;
-			for (j = 1; j < 1001; j++) { 
+			for (j = 1; j < 5; j++) { 
 				
 				String SqlPatient = " SELECT fhir_create_resource(' {"
 						+ "\"allowId\":true,"
@@ -70,7 +71,7 @@ public class DataBase_AT {
 						+ "\"id\":\"" + j + "\", "
 						+ " \"name\":[{\"family\":\""+ DataGenerator_AT.generateNachName() + "\", \"given\":\""+ DataGenerator_AT.generateVorName() + "\"}], "
 						+ " \"address\":[{\"line\":[\""+ DataGenerator_AT.generateStreet() + DataGenerator_AT.generateHouseNumber() + "\"], "
-						+ " \"city\":\""+ generator.randomiseCity() + "\", \"postalCode\":\""+ generator.randomisePostcode() + "\"}] "
+						+ " \"city\":\""+ stadtGenerator.randomiseCity() + "\", \"postalCode\":\""+ stadtGenerator.randomisePostcode() + "\"}] "
 						+ "}} ')";	
 				
 				String SqlEncounter = " SELECT fhir_create_resource(' {"
@@ -79,7 +80,8 @@ public class DataBase_AT {
 						+ "\"id\":\"" + j + "\", "
 						+ " \"status\":\"onleave\", "
 						+ " \"patient\":{\"reference\":\"Patient/" + j + "\"}, "
-						+ " \"location\":[{\"location\":{\"reference\":\"Location/1 \"},\"status\":\"active\"}] "
+						+ " \"location\":[{\"location\":{\"reference\":\"Location/" + DataGenerator_AT.getRandomId(locationNum) + " \"},\"status\":\"active\"}] "
+//						+ " \"location\":[{\"location\":{\"reference\":\"Location/1 \"},\"status\":\"active\"}] "
 						+ "}} ')";
 					
 				rs = st.executeQuery( SqlPatient );

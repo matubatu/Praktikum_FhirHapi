@@ -31,7 +31,8 @@ public class PLZ_StadtGenerator {
 		int i;
 
         try {
-        	File f = new File("c:\\Users\\matubatu\\Desktop\\PLZ_Stadt.xls");
+//        	File f = new File("c:\\Users\\matubatu\\Desktop\\PLZ_Stadt.xls");
+        	File f = new File("c:\\git\\Praktikum_FhirHapi\\myProject\\Dokumente\\PLZ_Stadt.xls");
             FileInputStream file = new FileInputStream(f);
 
             HSSFWorkbook workbook = new HSSFWorkbook(file);
@@ -96,5 +97,7 @@ public class PLZ_StadtGenerator {
     	String postCode = (String) getKeyFromValue(map, randomValue);
     	return postCode; 
     }
+
+
     
 }

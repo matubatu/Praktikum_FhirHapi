@@ -30,11 +30,8 @@ public class ReadExcelData_PLZ_Stadt {
         	File f = new File("c:\\Users\\matubatu\\Desktop\\Map.xls");
             FileInputStream file = new FileInputStream(f);
 
-//Get the workbook instance for XLS file 
             HSSFWorkbook workbook = new HSSFWorkbook(file);
-//Get first sheet from the workbook
             HSSFSheet sheet = workbook.getSheetAt(0);
-//Iterate through each rows from first sheet
             Iterator<Row> rowIterator = sheet.iterator();
             
             while(rowIterator.hasNext()) {

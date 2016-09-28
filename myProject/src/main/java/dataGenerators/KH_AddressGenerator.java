@@ -31,7 +31,7 @@ public class KH_AddressGenerator {
 		
         try {
         	
-        	File f = new File("c:\\Users\\matubatu\\Desktop\\KH_Adresse.xls");
+        	File f = new File("c:\\git\\Praktikum_FhirHapi\\myProject\\Dokumente\\KH_Adresse.xls");
             FileInputStream file = new FileInputStream(f);
 
             HSSFWorkbook workbook = new HSSFWorkbook(file);

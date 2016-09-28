@@ -31,7 +31,7 @@ public class DataBase {
 			st.executeUpdate(" SET plv8.start_proc = 'plv8_init' ");
 	
 //--- Patient-Encounter Creation
-			for (int i = 1; i <10000; i++) { 
+			for (int i = 1; i <2; i++) { 
 				
 				String SqlPatient = " SELECT fhir_create_resource(' {"
 						+ "\"allowId\":true,"

@@ -64,4 +64,12 @@ public class DataGenerator_AT {
 		return " " + rand.nextInt(10) + 1;
    }
 
+// Location ID generator
+public static String getRandomId(int locNum) {
+	int x = rand.nextInt(locNum) + 1;
+	return "" + x;
+	
+	
+}
+
 }
