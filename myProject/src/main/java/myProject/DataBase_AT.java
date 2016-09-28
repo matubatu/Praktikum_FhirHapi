@@ -18,7 +18,7 @@ import dataGenerators.PLZ_StadtGenerator;
 
 public class DataBase_AT {
 
-	public static final String pfad = "c:\\Users\\matubatu\\Desktop\\Map.xls";
+	public static final String pfad = "c:\\git\\Praktikum_FhirHapi\\myProject\\Dokumente\\Map.xls";
 	public static final int locationNum = 10;
 	
 	public static void main(String[] args) {
@@ -81,7 +81,6 @@ public class DataBase_AT {
 						+ " \"status\":\"onleave\", "
 						+ " \"patient\":{\"reference\":\"Patient/" + j + "\"}, "
 						+ " \"location\":[{\"location\":{\"reference\":\"Location/" + DataGenerator_AT.getRandomId(locationNum) + " \"},\"status\":\"active\"}] "
-//						+ " \"location\":[{\"location\":{\"reference\":\"Location/1 \"},\"status\":\"active\"}] "
 						+ "}} ')";
 					
 				rs = st.executeQuery( SqlPatient );

@@ -31,7 +31,6 @@ public class PLZ_StadtGenerator {
 		int i;
 
         try {
-//        	File f = new File("c:\\Users\\matubatu\\Desktop\\PLZ_Stadt.xls");
         	File f = new File("c:\\git\\Praktikum_FhirHapi\\myProject\\Dokumente\\PLZ_Stadt.xls");
             FileInputStream file = new FileInputStream(f);
 
