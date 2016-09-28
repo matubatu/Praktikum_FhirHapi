@@ -27,7 +27,8 @@ public class ReadExcelData_PLZ_Stadt {
 		HashMap<String, String> map = new HashMap<String, String>();
     	
         try {
-        	File f = new File("c:\\Users\\matubatu\\Desktop\\Map.xls");
+
+        	File f = new File("c:\\git\\Praktikum_FhirHapi\\myProject\\Dokumente\\Map.xls");
             FileInputStream file = new FileInputStream(f);
 
             HSSFWorkbook workbook = new HSSFWorkbook(file);
@@ -37,7 +38,6 @@ public class ReadExcelData_PLZ_Stadt {
             while(rowIterator.hasNext()) {
                 Row row = rowIterator.next();
 
-                //For each row, iterate through each columns
                 Iterator<Cell> cellIterator = row.cellIterator();
                 
                 while(cellIterator.hasNext()) {
@@ -53,7 +53,6 @@ public class ReadExcelData_PLZ_Stadt {
                         	stadt = cell.getStringCellValue(); 
                            	break;
                     }
-//                    System.out.println(""); 
                 }
                 map.put(plz, stadt);
             }
@@ -76,6 +75,9 @@ public class ReadExcelData_PLZ_Stadt {
         }
     }// main
     
+    /**
+     * gives back key from value 
+     */
     private static Object getKeyFromValue(Map<String, String> hm, Object value) {
         for (Object o : hm.keySet()) {
           if (hm.get(o).equals(value)) {

@@ -18,8 +18,8 @@ import dataGenerators.PLZ_StadtGenerator;
 
 public class DataBase_AT {
 
-	public static final String pfad = "c:\\git\\Praktikum_FhirHapi\\myProject\\Dokumente\\Map.xls";
 	public static final int locationNum = 10;
+	public static final int patientNum = 10;
 	
 	public static void main(String[] args) {
 		
@@ -33,6 +33,7 @@ public class DataBase_AT {
 		try {
 			
 			//--- Connection-Configuration of DB
+			
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection("jdbd:postgresql://localhost:2345/fhir","postgres", "");
 			if (con!=null) System.out.println("Server connected \n");
@@ -40,6 +41,7 @@ public class DataBase_AT {
 			st.executeUpdate(" SET plv8.start_proc = 'plv8_init' ");
 	
 			//--- Location Res Creation
+			
 			System.out.println("processing Location data from Excel... \n ");
 
 			int i;
@@ -58,12 +60,14 @@ public class DataBase_AT {
 				rs = st.executeQuery( SqlLocation);
 					
 			} // for
+
 			System.out.println(i-1 + " Location-Resources was uploaded! \n");
 
 			//--- Patient-Encounter Res Creation
+			
 			System.out.println("creating resources... \n ");
 			int j;
-			for (j = 1; j < 5; j++) { 
+			for (j = 1; j < patientNum; j++) { 
 				
 				String SqlPatient = " SELECT fhir_create_resource(' {"
 						+ "\"allowId\":true,"
@@ -87,34 +91,34 @@ public class DataBase_AT {
 				rs = st.executeQuery( SqlEncounter);
 					
 			} // for
-				System.out.println(j-1 + " Patient-Encoutner pair was created! \n ");
+
+			System.out.println(j-1 + " Patient-Encoutner pair was created! \n ");
             
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(VersionTest.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-            ex.printStackTrace();
-            
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-    				System.out.println("ResultSet closed");
-                }
-                if (st != null) {
-                    st.close();
-                    System.out.println("Statement closed");
-                }
-                if (con != null) {
-                    con.close();
-                    System.out.println("Connection closed");
-                }
-            } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(VersionTest.class.getName());
-                lgr.log(Level.WARNING, ex.getMessage(), ex);
-            }
-        }
-		
-	}// main
+			} catch (ClassNotFoundException e) {
+			   e.printStackTrace();
+			} catch (SQLException ex) {
+			   Logger lgr = Logger.getLogger(VersionTest.class.getName());
+			   lgr.log(Level.SEVERE, ex.getMessage(), ex);
+			   ex.printStackTrace();
+			   
+			} finally {
+			   try {
+			       if (rs != null) {
+			           rs.close();
+						System.out.println("ResultSet closed");
+			       }
+			       if (st != null) {
+			           st.close();
+			           System.out.println("Statement closed");
+			       }
+			       if (con != null) {
+			           con.close();
+			           System.out.println("Connection closed");
+			       }
+			   } catch (SQLException ex) {
+			       Logger lgr = Logger.getLogger(VersionTest.class.getName());
+			       lgr.log(Level.WARNING, ex.getMessage(), ex);
+			   }
+			}
+	} // main
 }

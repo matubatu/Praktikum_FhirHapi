@@ -55,8 +55,6 @@ public class NameGenerator {
                         switch(stringColumnCount) {
                         case 1:
                             vorName = cell.getStringCellValue();
-//                            String gender = vorName.substring(0,1);
-//                            System.out.println(gender +"  "+vorName);
                             break;
                         case 2:
                             nachName = cell.getStringCellValue();
@@ -74,7 +72,9 @@ public class NameGenerator {
         }
     }// 
     
-// randomises gender with surname
+    /**
+     * randomis gender with surname from HashMap
+     */
     public String randomiseGenderVorname() {
     	
     	Random generator = new Random();
@@ -83,6 +83,10 @@ public class NameGenerator {
     	return vorName;
     	
     }
+
+    /**
+     * randomis familyname from HashMap
+     */
     public String randomiseNachname() {
     	
         Random generator = new Random();
@@ -90,7 +94,5 @@ public class NameGenerator {
         String nachName = (String) nachNamen[generator.nextInt(nachNamen.length)];
         return nachName;
     }
-
-
     
 }
