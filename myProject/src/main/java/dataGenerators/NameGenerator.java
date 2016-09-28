@@ -22,7 +22,6 @@ import org.apache.poi.ss.usermodel.Row;
 public class NameGenerator {
 	
 	private HashMap<String, String> map = new HashMap<String, String>();
-//	private String randomValue;
     int stringColumnCount = 0;
 
 	
@@ -30,7 +29,6 @@ public class NameGenerator {
     	
     	String vorName = null;
 		String nachName = null;
-		int i;
 
         try {
             File f = new File("c:\\git\\Praktikum_FhirHapi\\myProject\\Dokumente\\Vorname_Nachname.xls");
@@ -42,7 +40,7 @@ public class NameGenerator {
             
             while(rowIterator.hasNext()) {
                 Row row = rowIterator.next();
-                stringColumnCount=0;
+                stringColumnCount = 0;
 
                 Iterator<Cell> cellIterator = row.cellIterator();
                 
