@@ -12,7 +12,7 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import dataGenerators.DataGenerator;
 
-public class PatEncounter_Random_Object {
+public class PatEncounter_Random_Object2 {
 
 	public static void main(String[] args) {
 		
@@ -51,15 +51,8 @@ public class PatEncounter_Random_Object {
 		try {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection("jdbd:postgresql://localhost:2345/fhir","postgres", "");
-			
 			if (con!=null) System.out.println("Connected");
-			
 			st = con.createStatement();
-            rs = st.executeQuery("SELECT VERSION()");
-
-            if (rs.next()) {
-                System.out.println(rs.getString(1));
-            }
             st.executeUpdate(" SET plv8.start_proc = 'plv8_init' ");
             
             rs = st.executeQuery( SqlPrint );
